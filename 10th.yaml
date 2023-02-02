@@ -1,0 +1,32 @@
+openapi: 3.0.0
+info:
+  title: G-Mall Customer API
+  version: 1.0.0
+
+paths:
+  /customers/{customer_id}/wishlist:
+    get:
+      description: Get the wishlist for a customer with the given customer_id
+      parameters:
+        - name: customer_id
+          in: path
+          description: ID of the customer to retrieve the wishlist
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Wishlist for the customer
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    product_id:
+                      type: integer
+                    product_name:
+                      type: string
+                    product_price:
+                      type: number

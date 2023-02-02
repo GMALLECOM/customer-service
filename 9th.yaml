@@ -1,0 +1,96 @@
+openapi: 3.0.0
+info:
+  title: G-Mall Customer API
+  version: 1.0.0
+
+paths:
+  /customers/{customer_id}/addresses:
+    get:
+      description: Get the list of addresses for a customer with the given customer_id
+      parameters:
+        - name: customer_id
+          in: path
+          description: ID of the customer to retrieve addresses
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: List of customer addresses
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    address_id:
+                      type: integer
+                    street_address:
+                      type: string
+                    city:
+                      type: string
+                    state:
+                      type: string
+                    zipcode:
+                      type: string
+                    country:
+                      type: string
+
+  /customers/{customer_id}/orders:
+    get:
+      description: Get the list of orders for a customer with the given customer_id
+      parameters:
+        - name: customer_id
+          in: path
+          description: ID of the customer to retrieve orders
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: List of customer orders
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    order_id:
+                      type: integer
+                    order_date:
+                      type: string
+                    order_total:
+                      type: number
+                    delivery_id:
+                      type: integer
+
+  /customers/{customer_id}/history:
+    get:
+      description: Get the purchase history for a customer with the given customer_id
+      parameters:
+        - name: customer_id
+          in: path
+          description: ID of the customer to retrieve purchase history
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Purchase history for the customer
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    order_id:
+                      type: integer
+                    order_date:
+                      type: string
+                    order_total:
+                      type: number
+                    delivery_id:
+                      type: integer

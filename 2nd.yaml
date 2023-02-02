@@ -1,0 +1,95 @@
+openapi: 3.0.3
+info:
+  title: G-Mall API
+  version: 1.0.0
+  description: This is the API documentation for G-Mall
+
+servers:
+  - url: https://api.g-mall.com/v1
+
+paths:
+  /inventory:
+    get:
+      description: Retrieve all products in the inventory
+      parameters: []
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductList'
+        401:
+          description: Unauthorized
+  /inventory/{product_id}:
+    get:
+      description: Retrieve a product by its id
+      parameters:
+        - name: product_id
+          in: path
+          description: ID of the product to retrieve
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        404:
+          description: Not Found
+        401:
+          description: Unauthorized
+  /customers/{customer_id}:
+    get:
+      description: Retrieve a customer by its id
+      parameters:
+        - name: customer_id
+          in: path
+          description: ID of the customer to retrieve
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+        404:
+          description: Not Found
+        401:
+          description: Unauthorized
+
+components:
+  schemas:
+    ProductList:
+      type: object
+      properties:
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/Product'
+    Product:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+        price:
+          type: number
+    Customer:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        email:
+          type: string
